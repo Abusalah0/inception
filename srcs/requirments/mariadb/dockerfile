@@ -1,0 +1,13 @@
+# requirements/mariadb/Dockerfile
+FROM debian:11
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends mariadb-server \
+ && rm -rf /var/lib/apt/lists/*
+
+COPY tools/db.sh /usr/local/bin/db.sh
+RUN chmod +x /usr/local/bin/db.sh
+
+EXPOSE 3306
+
+CMD ["/usr/local/bin/db.sh"]
